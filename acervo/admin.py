@@ -14,4 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
 class ProductInstanceAdmin(admin.ModelAdmin):
     list_display = ('id','Product','imprint','due_back','status')
 
-
+admin.site.register(Author)
+admin.site.register(ProductInstance)
+admin.site.register(Product)
+admin.site.register(Genre)

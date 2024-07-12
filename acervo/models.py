@@ -1,6 +1,12 @@
 from django.db import models
 import uuid
-from django.core.validators import MaxValueValidator
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
+class LoginForm(AuthenticationForm):
+    # Optionally, add custom validation or fields here
+    pass
+
 
 
 class Genre(models.Model):

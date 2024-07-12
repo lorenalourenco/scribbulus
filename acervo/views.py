@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from .models import Product
 
 def login_view(request):
     if request.method == 'POST':
@@ -9,10 +10,11 @@ def login_view(request):
         if user is not None:
             login(request, user)
             # Redirect to a success page.
-            return redirect('acervo.html')
+            return redirect('acervo/')
         else:
-            # Return an 'invalid login' error message.
-            return render(request, 'login.html', {'error_message': 'Invalid credentials.'})
+            # Return an 'invalid login' error message.#
+            #return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
+            return redirect('acervo/')
     else:
         return render(request, 'login.html')
 
