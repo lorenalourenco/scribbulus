@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Books</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4"> <!-- Colunas Bootstrap com margem inferior -->
+                <div class="card" style="width: 90%;">
+                    <img src="{{ product.image_url }}" class="card-img-top" alt="..." height="450">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        
+                        <!-- Acordion com margem inferior -->
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item mb-3"> <!-- Adiciona margem inferior aos acordions -->
+                            
+                                {% if product.status == 'Available' %}
+                                <div align="center">
+                                <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " href="order" role="button">
+                                    {{ product.status }}
+                                </a>
+                                </div>
+                            {% endif %}
+                                    
+                                {% if product.status == 'Maintenance' %}
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <h6 class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3 accordion-header text-center">
+                                        {{ product.status }}
+                                    </h6>
+                                </div>
+                                {% endif %}
+
+                                {% if product.status == 'On Loan' %}
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <h6 class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3 accordion-header text-center">
+                                        {{ product.status }}
+                                    </h6>
+                                </div>
+                                {% endif %}
+
+                                {% if product.status == 'Reserved' %}
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <h6 class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3 accordion-header text-center">
+                                        {{ product.status }}
+                                    </h6>
+                                </div>
+                                {% endif %}
+                                
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-center"> <!-- Centraliza o texto -->
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mb-3"> <!-- Adiciona margem inferior aos acordions -->
+                                <h4 class="accordion-header text-center"> <!-- Centraliza o texto -->
+                                    {{ product.author }}
+                                </h4>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-center"> <!-- Centraliza o texto -->
+                                        {{ product.summary }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mb-3"> <!-- Adiciona margem inferior aos acordions -->
+                                <h6 class="accordion-header text-center"> <!-- Centraliza o texto -->
+                                    in stock: {{ product.stock }}
+                                </h6>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-center"> <!-- Centraliza o texto -->
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mb-3"> <!-- Adiciona margem inferior aos acordions -->
+                                <h4 class="accordion-header text-center"> <!-- Centraliza o texto -->
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo-{{ product.id }}" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                        <span class="d-block w-100 text-center">
+                                        Summary
+                                        </span>
+                                    </button>
+                                </h4>
+                                <div id="flush-collapseTwo-{{ product.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body text-center"> <!-- Centraliza o texto -->
+                                        {{ product.summary }} 
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
