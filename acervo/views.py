@@ -4,20 +4,19 @@ from .models import Product
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # Redirect to a success page.
+        username = request.POST.get('username')  # Obtém o username do formulário
+        password = request.POST.get('password')  # Obtém a senha do formulário
+        useruser = authenticate(request, username=username, password=password)
+        print(useruser)
+        try:
+            login(request, useruser)
+            # Redireciona para uma página de sucesso.
             return redirect('acervo/')
-        else:
-            # Return an 'invalid login' error message.#
-            #return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
-            return redirect('acervo/')
+        except Exception as e:
+            raise(request, 'login.html', {'error_message': e})
     else:
         return render(request, 'login.html')
-
+    
 def index(request):
     products = Product.objects.all()
     return render(request, 'acervo.html', {'products': products})

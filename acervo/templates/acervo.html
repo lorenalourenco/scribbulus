@@ -16,7 +16,8 @@
                             
                                 {% if product.status == 'Available' %}
                                 <div align="center">
-                                <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " href="order" role="button">
+                                <div id="liveAlertPlaceholder"></div>
+                                <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " id="liveAlertBtn" type="button" >
                                     {{ product.status }}
                                 </a>
                                 </div>
