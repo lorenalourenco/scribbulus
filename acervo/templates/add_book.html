@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+<div class="title-table">
+    {# @TODO(joao.victor): mover esse texto para label de tradução #}
+    <h5 class="card-title">Sites</h5>
+    <p class="card-description text-muted small">
+        formulário de cadastramento de um novo site
+    </p>
+  </div>
+  <div class="card mt-3">
+    <form id="filter"
+        action="{% url 'suite:add_site' %}"
+        method="post"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col m-2">
+                    <label class="form-label" for="id_nome">Nome do Site</label>
+                    <span class="text-danger small">{{ form_contrato.numero.errors.0 }}</span>
+                    {% render_field form_suite.nome class="form-control" %}
+                </div>
+                <div class="col m-2">
+                    <label class="form-label" for="id_url">URL do Site</label>
+                    <span class="text-danger small">{{ form_contrato.data_fim.errors.0 }}</span>
+                    {% render_field form_suite.url class="form-control" %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m-2">
+                    <label class="form-label" for="id_descricao">Descrição</label>
+                    <span class="text-danger small">{{ form_contrato.valor.errors.0 }}</span>
+                    {% render_field form_suite.descricao class="form-control" %}
+                </div>
+            </div>
+            <div class="col m-2 form-check form-switch">
+                <label class="form-label" for="id_img">Imagem</label>
+                <span class="text-danger small">{{ form_contrato.ativo.errors.0 }}</span>
+                {% render_field form_suite.img class="form-control" %}
+            </div>
+            <button type="submit" class="add-formset btn btn-dark text-light d-flex mt-2">
+                <i class="bi bi-clipboard-check"></i>
+                <span class="ms-2">Adicionar Site</span>
+            </button>
+        </div>
+    </form>
+  </div>
+
+
+{% endblock %}

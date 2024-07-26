@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .models import Product
+from .forms import GenreForm, AuthorForm, ProductForm, ProductInstanceForm
 
 def login_view(request):
     if request.method == 'POST':
@@ -17,10 +18,15 @@ def login_view(request):
     else:
         return render(request, 'login.html')
     
-def index(request):
+def acervo(request):
     products = Product.objects.all()
-    return render(request, 'acervo.html', {'products': products})
+    formulario = GenreForm(), AuthorForm(), ProductInstanceForm(), ProductForm()
+    return render(request, 'acervo.html', {'products': products, 'form': formulario})
 
-def index2(request):
+def instance(request):
     instance = ProductInstance.objects.get(pk=1)
     return render(request, 'acervo.html', {'instance': instance})
+
+def emprestimo(request):
+    return render(request, 'emprestimo.html', {'products': Product})
+

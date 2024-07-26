@@ -19,7 +19,6 @@ class Product (models.Model): #BOOK
     title = models.CharField(max_length=255)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
-    price = models.FloatField()
     stock = models.IntegerField()
     image_url = models.CharField(max_length=2000)
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
@@ -84,3 +83,4 @@ class ProductInstance(models.Model):
         default='m',
         help_text='Book availability',
     )
+

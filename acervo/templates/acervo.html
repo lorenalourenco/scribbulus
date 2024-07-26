@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Books</h1>
+    
     <div class="row">
         {% for product in products %}
             <div class="col-md-4 mb-4"> <!-- Colunas Bootstrap com margem inferior -->
@@ -17,7 +18,7 @@
                                 {% if product.status == 'Available' %}
                                 <div align="center">
                                 <div id="liveAlertPlaceholder"></div>
-                                <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " id="liveAlertBtn" type="button" >
+                                <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " id="liveAlertBtn" type="button" href="emprestimo/" >
                                     {{ product.status }}
                                 </a>
                                 </div>
