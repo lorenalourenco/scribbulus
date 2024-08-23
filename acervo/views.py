@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from .models import Product
-from .forms import GenreForm, AuthorForm, ProductForm, ProductInstanceForm
+from .models import Product, Genre, Author, ProductInstance
+from .forms import GenreForm, AuthorForm, ProductForm, ProductInstanceForm, forms
 
 def login_view(request):
     if request.method == 'POST':
@@ -14,14 +14,50 @@ def login_view(request):
             # Redireciona para uma página de sucesso.
             return redirect('acervo/')
         except Exception as e:
-            raise(request, 'login.html', {'error_message': e})
+           return redirect('acervo/')
     else:
         return render(request, 'login.html')
     
+
 def acervo(request):
+    if request.method == 'POST':
+        # Criação dos formulários com dados POST
+        genre_form = GenreForm(request.POST)
+        author_form = AuthorForm(request.POST)
+        product_instance_form = ProductInstanceForm(request.POST)
+        product_form = ProductForm(request.POST)
+        
+        # Verificação da validade dos formulários
+        if (genre_form.is_valid() and
+            author_form.is_valid() and
+            product_instance_form.is_valid() and
+            product_form.is_valid()):
+            
+            # Salvar os dados dos formulários
+            product = product_form.save()
+            product_instance = product_instance_form.save(commit=False)
+            product_instance.product = product  # Ajuste se necessário
+            product_instance.save()
+            
+            # Redirecionar após o salvamento
+            return redirect('acervo')  # Redireciona para a mesma página ou para uma página de sucesso
+    
+    else:
+        # Criação dos formulários vazios para uma requisição GET
+        genre_form = GenreForm()
+        author_form = AuthorForm()
+        product_instance_form = ProductInstanceForm()
+        product_form = ProductForm()
+    
+    # Contexto para o template
+    forms = {
+        'genre_form': genre_form,
+        'author_form': author_form,
+        'product_instance_form': product_instance_form,
+        'product_form': product_form
+    }
     products = Product.objects.all()
-    formulario = GenreForm(), AuthorForm(), ProductInstanceForm(), ProductForm()
-    return render(request, 'acervo.html', {'products': products, 'form': formulario})
+    return render(request, 'acervo.html', {'products': products, 'forms': forms})
 
 def instance(request):
     instance = ProductInstance.objects.get(pk=1)
@@ -30,3 +66,6 @@ def instance(request):
 def emprestimo(request):
     return render(request, 'emprestimo.html', {'products': Product})
 
+def addformulario(request):
+    products = Product.objects.all()
+    return render(request, 'formulariolivro.html', {'products' : products, 'forms': forms})

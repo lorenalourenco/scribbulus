@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import NON_FIELD_ERRORS
+from django.forms import ModelForm
 from .models import *
 
 class GenreForm(forms.ModelForm):
@@ -10,7 +12,7 @@ class GenreForm(forms.ModelForm):
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = '__all__'
+        fields = 'first_name', 'last_name'
 
 
 class ProductForm(forms.ModelForm):
@@ -25,3 +27,10 @@ class ProductInstanceForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ArticleForm(ModelForm):
+    class Meta:
+        error_messages = {
+            NON_FIELD_ERRORS: {
+                "unique_together": "%(model_name)s's %(field_labels)s are not unique.",
+            }
+        }
