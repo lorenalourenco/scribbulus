@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Product, Genre, Author, ProductInstance
 from .forms import GenreForm, AuthorForm, ProductForm, ProductInstanceForm, forms
 
@@ -67,5 +68,24 @@ def emprestimo(request):
     return render(request, 'emprestimo.html', {'products': Product})
 
 def addformulario(request):
+    if request.method == "POST":
+        forms = ProductForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        forms = ProductForm()
+    
     products = Product.objects.all()
     return render(request, 'formulariolivro.html', {'products' : products, 'forms': forms})
+
+def deleteformulario(request, pk):
+    products = Product.objects.all()
+
+    if request.method == "POST":
+        products.delete()  # Exclui o livro do banco de dados
+        return redirect(reverse('product.tile'))  # Redireciona para a lista de livros após exclusão
+
+    return render(request, 'formulariolivro.html', {'products': products})
+
+

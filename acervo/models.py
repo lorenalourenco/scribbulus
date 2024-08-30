@@ -18,10 +18,10 @@ class Genre(models.Model):
 class Product (models.Model): #BOOK
     title = models.CharField(max_length=255)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
-    summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
+    summary = models.TextField(max_length=1000)
     stock = models.IntegerField()
     image_url = models.CharField(max_length=2000)
-    genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+    genre = models.ManyToManyField(Genre, )
 
     LOAN_STATUS = (
         ('Maintenance', 'Maintenance'),
@@ -50,9 +50,6 @@ class Product (models.Model): #BOOK
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('Died', null=True, blank=True)
-
     class Meta:
         ordering = ['last_name', 'first_name']
 

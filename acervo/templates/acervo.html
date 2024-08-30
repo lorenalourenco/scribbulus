@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Books</h1>
-    
+
+    <h1>Books<a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " style="margin-inline-start: 86% ; margin-bottom: 2%; margin-top: 2%;" type="button" href="formulariolivro/" >Edit</a></h1> 
+   
     <div class="row">
         {% for product in products %}
             <div class="col-md-4 mb-4"> <!-- Colunas Bootstrap com margem inferior -->
                 <div class="card" style="width: 90%;">
                     <img src="{{ product.image_url }}" class="card-img-top" alt="..." height="450">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
+                        <h5 class="accordion-header text-center">{{ product.title }}</h5>
                         
                         <!-- Acordion com margem inferior -->
                         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -93,8 +94,7 @@
                         
                     </div>
                 </div>
-                <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " type="button" href="formulariolivro/" >Add</a>
-                </a>
+                
             </div>
         {% endfor %}
     </div>
