@@ -10,19 +10,20 @@
                 <div class="card" style="width: 90%;">
                     <img src="{{ product.image_url }}" class="card-img-top" alt="..." height="450">
                     <div class="card-body">
-                        <h5 class="accordion-header text-center">{{ product.title }}</h5>
-                        
-                        <!-- Acordion com margem inferior -->
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item mb-3"> <!-- Adiciona margem inferior aos acordions -->
-                            
                                 {% if product.status == 'Available' %}
                                 <div align="center">
                                 <div id="liveAlertPlaceholder"></div>
                                 <a class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg " id="liveAlertBtn" type="button" href="emprestimo/" >
                                     {{ product.status }}
                                 </a>
-                                </div>
+                                </div>                       
+                        
+                        <!-- Acordion com margem inferior -->
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                             <h5 class="accordion-header text-center">{{ product.title }}</h5>
+                            <div class="accordion-item mb-3"> <!-- Adiciona margem inferior aos acordions -->
+                            
+
                             {% endif %}
                                     
                                 {% if product.status == 'Maintenance' %}

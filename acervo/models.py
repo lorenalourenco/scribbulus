@@ -8,7 +8,6 @@ class LoginForm(AuthenticationForm):
     pass
 
 
-
 class Genre(models.Model):
     name = models.CharField(max_length=200, help_text='Enter a book genre (e.g. Science Fiction)')
 

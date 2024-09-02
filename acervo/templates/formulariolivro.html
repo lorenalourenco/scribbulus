@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %} 
-
+<a href="http://127.0.0.1:8000/login/acervo/" style="margin-top: 2%; margin-left: 93%;"><button class="btn btn-outline-primary btn-bg bg-primary-subtle btn-lg" style="margin-top: 2%; margin-bottom: 2%;">Acervo</button></a>
 <div class="card" style="align-items: center; margin: 1%; display: flex;">
     <div class="card-body">
       <h5 class="card-title">Add Book</h5>
@@ -10,27 +10,31 @@
             {% csrf_token %}
             {{ forms }}
            <button type="submit">Submit</button> 
-       </form>
+        </form>
      </p>
     </div>
   </div>
    
   
 <div class="card" style="align-items: center; margin-top: 1%; display: flex;  justify-content: center;">
-    <div class="card-body" >
-      <h5 class="card-title">Delete Book</h5>
-      <p class="text">
-        <<ul>
-            {% for products in product %}
-                <li>{{ product.title }} </li>
-            {% endfor %}
-        </ul>
-     </p>
-    </div>
-  </div>     
-    <a class="btn btn-primary" href="http://127.0.0.1:8000/login/acervo/"><button class="btn btn-primary">Acervo</button></a>
- 
-</div>
+        <div class="card-body" >
+          <h5 class="card-title">Delete Book</h5>
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="productSelect"></label>
+                <select class="form-select" id="productSelect" name="product_id" aria-label="Select product">
+                    <option value="" selected>Select a book</option>
+                    {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" name="delete_product" class="btn btn-danger mt-2">Delete</button>
+        </form>
+</div>         
+</div> 
+
 
 
  

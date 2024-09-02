@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .models import Product, Genre, Author, ProductInstance
 from .forms import GenreForm, AuthorForm, ProductForm, ProductInstanceForm, forms
@@ -67,25 +67,26 @@ def instance(request):
 def emprestimo(request):
     return render(request, 'emprestimo.html', {'products': Product})
 
-def addformulario(request):
+def manage_products(request):
+    forms = ProductForm(request.POST)
+
     if request.method == "POST":
-        forms = ProductForm(request.POST)
-        if forms.is_valid():
-            forms.save()
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        forms = ProductForm()
+        if 'delete_product' in request.POST:
+            product_id = request.POST.get('product_id')
+            if product_id:
+                product = get_object_or_404(Product, id=product_id)
+                product.delete()
+            return redirect('http://127.0.0.1:8000/login/acervo/formulariolivro')  # Redireciona para evitar reenvio do formulário
+
+        elif 'add_product' in request.POST:
+            forms = ProductForm(request.POST)
+            if forms.is_valid():
+                forms.save()
+ # Redireciona para evitar reenvio do formulário
+            else:
+                forms = ProductForm()
     
     products = Product.objects.all()
-    return render(request, 'formulariolivro.html', {'products' : products, 'forms': forms})
-
-def deleteformulario(request, pk):
-    products = Product.objects.all()
-
-    if request.method == "POST":
-        products.delete()  # Exclui o livro do banco de dados
-        return redirect(reverse('product.tile'))  # Redireciona para a lista de livros após exclusão
-
-    return render(request, 'formulariolivro.html', {'products': products})
+    return render(request, 'formulariolivro.html', {'products': products, 'forms': forms})
 
 
