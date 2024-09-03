@@ -12,7 +12,7 @@ class GenreForm(forms.ModelForm):
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = 'first_name', 'last_name'
+        fields = ['first_name', 'last_name']
 
 
 class ProductForm(forms.ModelForm):

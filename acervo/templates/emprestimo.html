@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="card mb-3" style="max-width: 540px;">
+<div class="card mb-3" style="width: 20%; height: 20%; margin-top: 6%; margin-left: 40%;">
     <div class="row g-0">
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Do you wish to loan this book?</h5>
-          <a href="http://127.0.0.1:8000/login/acervo/"><button class="btn btn-danger mt-2" type="button">No</button></a>
+        <div class="card-body" style=" padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; background-color: #fff;">
+          <h5 class="card-title" style="text-align: center;">Do you wish to loan this book?</h5>
+          <a href="http://127.0.0.1:8000/login/acervo/" style="margin-left: 40%;"><button class="btn btn-danger mt-2" type="button">
+            No
+          </button></a>
             <p>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+            <button style="margin: 40%; margin-top: 15%; margin-bottom: 3%;" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
               Yes
             </button>
           </p>
-          <div style="min-height: 120px;">
-            <div class="collapse collapse-horizontal" id="collapseWidthExample">
-              <div class="card card-body" style="width: 300px;">
-                This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.
+          <div style="min-height: 2px;">
+            <a href="http://127.0.0.1:8000/login/acervo/"><div class="collapse collapse-horizontal" id="collapseWidthExample">
+              <div class="btn btn-outline-success" style="width: 222px;">
+                *Book successfully loaned* 
+                  Click Here!
               </div>
             </div>
+          </a>
           </div>
             
         </div>
-      </div>
+      
     </div>
   </div>
 {% endblock %}

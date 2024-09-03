@@ -67,6 +67,16 @@ def instance(request):
 def emprestimo(request):
     return render(request, 'emprestimo.html', {'products': Product})
 
+def addauthor(request):
+    if request.method == "POST":
+        forms = AuthorForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('http://127.0.0.1:8000/login/acervo/formulariolivro') 
+    else:
+        forms = AuthorForm()
+        return render(request, 'formulariolivro.html', {'forms': forms})
+
 def manage_products(request):
     forms = ProductForm(request.POST)
 
@@ -82,9 +92,10 @@ def manage_products(request):
             forms = ProductForm(request.POST)
             if forms.is_valid():
                 forms.save()
- # Redireciona para evitar reenvio do formulário
-            else:
-                forms = ProductForm()
+
+
+    else:
+        forms = ProductForm()
     
     products = Product.objects.all()
     return render(request, 'formulariolivro.html', {'products': products, 'forms': forms})
