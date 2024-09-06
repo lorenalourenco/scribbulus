@@ -41,7 +41,10 @@
     <p class="text">
       <form method="post">
           {% csrf_token %}
-          {{ forms }}
+          <label for="first_name">First name:</label>
+          <input type="text" id="first_name" name="first_name"><br><br>
+          <label for="last_name">Last name:</label>
+          <input type="text" id="last_name" name="last_name"><br><br>
           <button type="submit">Submit</button> 
       </form>
    </p>
