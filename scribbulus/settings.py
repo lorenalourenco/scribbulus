@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+
+#nao sei se vamos usar isso mas:
+#with open('.venv/Lib/.postgres') as fh:
+    #os.environ.update(line.strip().split('=', 1) for line in fh)
+    
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,10 +83,14 @@ WSGI_APPLICATION = 'scribbulus.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DATABASES = { 
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.environ.get('database'),
+        'NAME': os.environ.get('lorena'),
+        'USER': os.environ.get('lorena'),
+        'PASSWORD': os.environ.get('lorena'),
+        'PORT': '5434',
     }
 }
 
@@ -129,3 +139,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend'
 ]
+
+
+#isso aq tb n sei se ta certo mas vamos ver ai né:
+#database_url = os.getenv('DATABASE_URL')
+#if database_url is None:
+ #   raise EnvironmentError("DATABASE_URL environment variable is not set.")
+
+#db_name = database_url.split('/')[-1]

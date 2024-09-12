@@ -1,0 +1,26 @@
+services:
+
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - database
+    environment:
+      - POSTGRES_HOST = database
+      - POSTGRES_NAME = lorena
+      - POSTGRES_USER = lorena
+      - POSTGRES_PASSWORD = lorena
+    command: python manage.py runserver 0.0.0.0:8000
+
+  database:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=lorena
+      - POSTGRES_USER=lorena
+      - POSTGRES_PASSWORD = lorena
+    ports:
+      - 5434:5434
