@@ -17,7 +17,8 @@ import os
 #nao sei se vamos usar isso mas:
 #with open('.venv/Lib/.postgres') as fh:
     #os.environ.update(line.strip().split('=', 1) for line in fh)
-    
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,7 +91,7 @@ DATABASES = {
         'NAME': os.environ.get('lorena'),
         'USER': os.environ.get('lorena'),
         'PASSWORD': os.environ.get('lorena'),
-        'PORT': '5434',
+        'PORT': '5432',
     }
 }
 
